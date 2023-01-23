@@ -1,0 +1,30 @@
+
+/* .search input {
+  border: none;
+  padding-right: 1rem;
+
+  color: #a1a1a1;
+  background: #edf3f8;
+}
+
+.search img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+ */
+/* table th,tr,td{
+  border: 1px solid gray;
+} */
+.borde{
+border: 1px solid red;
+}
+ .search input{
+   height: 2.5em;
+   color: #3d3c3c;
+  background: #e7eaec;
+ }
+ .search img{
+    height:20px;
+    cursor: pointer;
+ }

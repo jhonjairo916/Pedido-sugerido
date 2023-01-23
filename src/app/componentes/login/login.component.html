@@ -1,0 +1,52 @@
+<header id="main-header" class="py-2 bg-info text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6"><i class="fas fa-user"></i>Login</div>
+    </div>
+  </div>
+</header>
+<section id="login" class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mx-auto p-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>Login</h3>
+          </div>
+          <div class="card-body">
+            <form (submit)="login()">
+              <div class="mb-3">
+                <label for="inputEmail" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  name="inputEmail"
+                  [(ngModel)]="inputEmail"
+                  aria-describedby="emailHelp"
+                />
+                <div id="emailHelp" class="form-text">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="inputPassword" class="form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  name="inputPassword"
+                  [(ngModel)]="inputPassword"
+                />
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>

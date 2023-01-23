@@ -1,0 +1,46 @@
+<header class="py-2 bg-info text-white">
+  <div class="container">
+    <div class="row">
+      <form class="form-group">
+        <div class="col-md-4 d-flex search" >
+          <input
+            type="text"
+            [(ngModel)]="buscador"
+            name="buscador"
+            (ngModelChange)="buscarProducto()"
+            id="buscador"
+            class="form-control"
+            placeholder="Buscar producto"
+          />
+          <label class="input-group-text" for="buscador">
+            <img  src="../../../assets/busqueda.svg" alt="Search">
+           </label>
+         <!--  <span class="input-group-text" id="addon-wrapping">
+            <img  src="../../../assets/busqueda.svg" alt="Search">
+          </span> -->
+        </div>
+        <flash-messages></flash-messages>
+      </form>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 mt-2 mx-auto">
+      <table class="table table-striped table-hover">
+        <thead>
+          <th>id</th>
+          <th>Descripcion</th>
+          <th>Costo Producto</th>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let producto of productos; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ producto.desProducto }}</td>
+            <td>{{ producto.costoProd | currency : "MNX" : "$" : "1.1-2" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

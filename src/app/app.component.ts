@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pedidoSugerido';
+  constructor(){
+    this.Verificar()
+  }
+  Verificar()
+  {
+    if(this.title ==="pedidoSugerido"){
+      return true;
+    }
+    return false
+  }
 }

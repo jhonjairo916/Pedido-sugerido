@@ -1,0 +1,75 @@
+<header class="py-2 bg-info text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <i class="fas fa-clipboard p-1"></i>Crear producto
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row mb-4">
+    
+    <div class="col-md-8 mx-auto">
+      <flash-messages></flash-messages>
+      <a routerLink="/pedido/listar_producto" class="btn btn-light mt-2 text-muted ">Listar Producto</a>
+      <form #formProducto="ngForm" (ngSubmit)="guardarProducto(formProducto)">
+        <div class="card mt-4">
+          <div class="card-header">
+            <h3>Crear Producto</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-8">
+                <label for="nombre" class="form-label"
+                  >Descripcion Producto</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="desProducto"
+                  #desProducto="ngModel"
+                  placeholder="Descripcion del producto"
+                  required
+                  [(ngModel)]="producto.desProducto"
+                  [ngClass]="{'is-invalid':desProducto.errors && desProducto.touched}"
+                />
+                <div [hidden]="!desProducto.hasError('required')" class="invalid-feedback">
+                  Llenar esta campo es obligatorio
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="costo" class="form-label">Costo Producto</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  name="costoProd"
+                  #costo="ngModel"
+                  placeholder="Costo del producto"
+                  required
+                  [(ngModel)]="producto.costoProd"
+                  [ngClass]="{'is-invalid':costo.errors && costo.touched}"
+                />
+                <div [hidden]="!costo.hasError('required')" class="invalid-feedback">
+                  Llene este campo
+                </div>
+              </div>
+              <div class="col-12 mt-4">
+                <input
+                  type="submit"
+                  [disabled]="!formProducto.valid"
+                  class="btn btn-primary"
+                  value="Guardar"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+    
+  </div>
+  
+</div>
