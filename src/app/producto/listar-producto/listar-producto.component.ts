@@ -1,50 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'flash-messages-angular';
-import {  map, Observable, of } from 'rxjs';
+import { debounceTime, filter, map, Observable, of } from 'rxjs';
 import { Producto } from 'src/app/modelos/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
 @Component({
   selector: 'app-listar-producto',
   templateUrl: './listar-producto.component.html',
-  styleUrls: ['./listar-producto.component.css']
+  styleUrls: ['./listar-producto.component.css'],
 })
 export class ListarProductoComponent implements OnInit {
-  buscador:string;
-  productos: Producto[]=[]
-  productos$=of(this.productos);
-  producto$ = new Observable()
+  buscador: string;
+  productos: Producto[] = [];
+  productos$ = of(this.productos);
+  producto$ = new Observable();
   constructor(
     private productoService: ProductoService,
-    private fMessages:FlashMessagesService
-  ) 
-  {
-    this.productos = this.productoService.productos;  
-    this.productos$=of(this.productoService.productos)
-    this.producto$=this.productos$.pipe(
-      map((productos)=>productos
-      .map((producto)=>
-      {
-        if(producto.desProducto?.search('Arroz')!= -1){
-          console.log(producto)
-        }
-      }))) 
-  }
+    private fMessages: FlashMessagesService
+  ) {}
 
   ngOnInit(): void {
-  }
-  buscarProducto(){
-    //this.productos$.subscribe(console.log)
-    this.producto$.subscribe(console.log)
+    this.productos = this.productoService.productos;
+    let productoEncontrado:Producto[]=[]
+    this.producto$ = of(this.productoService.productos).pipe(
+      map((prod: Producto[]) =>
+        prod.map((pr: Producto) => {
+          if (pr.desProducto?.search('Arroz') != -1) {
+            productoEncontrado.push(pr)
+            return productoEncontrado;
+          }
+          return null;
+        })
+      )
+    );
+    this.producto$.subscribe(console.log);
 
- 
-  
-/*    this.productoService.buscarProducto('dd')
+    //this.producto$.subscribe(console.log);
+    /* this.productos$.pipe(filter((data:any)=>data>0),
+    map(val=>console.log(val))) */
+  }
+  buscarProducto() {
+    //this.producto$.subscribe(console.log);
+    // this.productoService.buscarProducto('Arroz').subscribe(console.log);
+    //this.productoService.producto$.subscribe(console.log)
+    /*    this.productoService.buscarProducto('dd')
   .subscribe((res)=>{
       console.log(res)
    }); */
-   
-   /*  let productoEncontrado: Producto[]=[];
+    /*  let productoEncontrado: Producto[]=[];
     this.productos= this.productoService.productos
       this.productos.map((value:Producto)=>{
           if (value.desProducto?.toUpperCase()?.search(this.buscador.toUpperCase()) != -1) {
@@ -59,4 +62,3 @@ export class ListarProductoComponent implements OnInit {
       this.productos= productoEncontrado */
   }
 }
-//
