@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'flash-messages-angular';
-import { debounceTime, filter, map, Observable, of } from 'rxjs';
+import { debounceTime, empty, filter, map, Observable, of } from 'rxjs';
 import { Producto } from 'src/app/modelos/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -12,8 +12,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 export class ListarProductoComponent implements OnInit {
   buscador: string;
   productos: Producto[] = [];
-  productos$ = of(this.productos);
-  producto$ = new Observable();
+ 
   constructor(
     private productoService: ProductoService,
     private fMessages: FlashMessagesService
@@ -21,32 +20,21 @@ export class ListarProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.productos = this.productoService.productos;
-    let productoEncontrado:Producto[]=[]
-    this.producto$ = of(this.productoService.productos).pipe(
-      map((prod: Producto[]) =>
-        prod.map((pr: Producto) => {
-          if (pr.desProducto?.search('Arroz') != -1) {
-            productoEncontrado.push(pr)
-            return productoEncontrado;
-          }
-          return null;
-        })
-      )
-    );
-    this.producto$.subscribe(console.log);
-
-    //this.producto$.subscribe(console.log);
-    /* this.productos$.pipe(filter((data:any)=>data>0),
-    map(val=>console.log(val))) */
   }
   buscarProducto() {
-    //this.producto$.subscribe(console.log);
-    // this.productoService.buscarProducto('Arroz').subscribe(console.log);
-    //this.productoService.producto$.subscribe(console.log)
-    /*    this.productoService.buscarProducto('dd')
-  .subscribe((res)=>{
-      console.log(res)
-   }); */
+    let productoE: Producto[]=[]
+    this.productos = this.productoService.productos
+
+    this.productoService.buscarProducto(this.buscador)
+    .subscribe(((productoEncontrado:Producto[])=>
+    productoEncontrado.map((pr:Producto)=>{
+      if(pr.desProducto?.toUpperCase().search(this.buscador.toUpperCase())!= -1){
+        productoE.push(pr)
+      }
+      console.log(productoE)
+    })))
+    this.productos = productoE//The matches are assgined to the array of object this.productos
+   
     /*  let productoEncontrado: Producto[]=[];
     this.productos= this.productoService.productos
       this.productos.map((value:Producto)=>{
