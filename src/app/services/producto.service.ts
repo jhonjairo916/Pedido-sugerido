@@ -1,6 +1,8 @@
 //import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, debounceTime, map, Observable, of, pipe } from 'rxjs';
+import { map, Observable, of, pipe } from 'rxjs';
+import { debounceTime} from 'rxjs/operators';
+
 import { Producto } from '../modelos/producto.model';
 
 @Injectable({
@@ -55,12 +57,14 @@ export class ProductoService implements OnInit {
   guardarProducto(producto: Producto) {
     this.productos.push(producto);
   }
-  buscarProducto(buscador: string) {
+  buscarProducto() {
     //let productoE: Producto[] = [];
-    return (this.producto$ = this.productos$.pipe(
+     this.producto$ = this.productos$.pipe(
+      debounceTime(1000),
       map((productos: Producto[]) => {
         return productos;
       })
-    ));
+    );
+    return this.producto$;
   }
 }

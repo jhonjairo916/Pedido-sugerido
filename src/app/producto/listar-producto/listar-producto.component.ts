@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlashMessagesService } from 'flash-messages-angular';
-import { debounceTime, empty, filter, map, Observable, of } from 'rxjs';
+import { debounceTime} from 'rxjs/operators';
 import { Producto } from 'src/app/modelos/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -11,6 +11,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class ListarProductoComponent implements OnInit {
   buscador: string;
+  //@ViewChild('no_match') no_match:Element
   productos: Producto[] = [];
  
   constructor(
@@ -20,33 +21,32 @@ export class ListarProductoComponent implements OnInit {
 
   ngOnInit(): void {
     this.productos = this.productoService.productos;
+    
   }
   buscarProducto() {
+   // alert(this.no_match.innerHTML.length)
     let productoE: Producto[]=[]
-    this.productos = this.productoService.productos
-
-    this.productoService.buscarProducto(this.buscador)
+    //let cont:number= 0;
+   // this.productos = this.productoService.productos
+    this.productoService.buscarProducto()
     .subscribe(((productoEncontrado:Producto[])=>
     productoEncontrado.map((pr:Producto)=>{
       if(pr.desProducto?.toUpperCase().search(this.buscador.toUpperCase())!= -1){
         productoE.push(pr)
       }
-      console.log(productoE)
+      
     })))
+    console.log(productoE)
     this.productos = productoE//The matches are assgined to the array of object this.productos
-   
-    /*  let productoEncontrado: Producto[]=[];
-    this.productos= this.productoService.productos
-      this.productos.map((value:Producto)=>{
-          if (value.desProducto?.toUpperCase()?.search(this.buscador.toUpperCase()) != -1) {
-            productoEncontrado.push(value);//Its created array with the items founded
-          }
-      })  
-      if(productoEncontrado.length === 0){
+     if(productoE.length === 0 ){
+      
         this.fMessages.show(`No existen concidencias de <i>${this.buscador}</i>`,{
-          cssClass:'alert-danger',timeout:1000
-        })
+          cssClass:'alert-warning',timeout:1000
+        })  
+     
+      
       }
-      this.productos= productoEncontrado */
+      //console.log(this.cont)
+    
   }
 }
