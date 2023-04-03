@@ -19,7 +19,10 @@
             <img  src="../../../assets/busqueda.svg" alt="Search">
           </span> -->
         </div>
-        <flash-messages></flash-messages>
+        <!--<flash-messages></flash-messages>-->
+        <div class="alert alert-primary" *ngIf="message">{{alert}}</div>
+        
+
       </form>
     </div>
   </div>

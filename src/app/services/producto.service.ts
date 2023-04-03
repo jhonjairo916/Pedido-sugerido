@@ -1,6 +1,6 @@
 //import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, OnInit } from '@angular/core';
-import { map, Observable, of, pipe } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, pipe } from 'rxjs';
 import { debounceTime} from 'rxjs/operators';
 
 import { Producto } from '../modelos/producto.model';
@@ -41,6 +41,8 @@ export class ProductoService implements OnInit {
   ];
   productos$ = of(this.productos);
   producto$ = new Observable<Producto[]>();
+  alerta = new BehaviorSubject<string>("");
+  alertaObs$ = this.alerta.asObservable()
   //eventProducto = new EventEmitter<Producto[]>()
   //TODO
   //Probar con BehaviorSubject
@@ -54,6 +56,10 @@ export class ProductoService implements OnInit {
   }
   ngOnInit(): void {}
 
+  obtenerNotificacion(message:string){
+    this.alerta.next(message);
+    return this.alertaObs$
+  }
   guardarProducto(producto: Producto) {
     this.productos.push(producto);
   }
@@ -66,5 +72,8 @@ export class ProductoService implements OnInit {
       })
     );
     return this.producto$;
+  }
+  notificarAlerta(message:string){
+
   }
 }
