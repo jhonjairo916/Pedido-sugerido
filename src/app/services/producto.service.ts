@@ -1,6 +1,6 @@
 //import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, OnInit } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, pipe } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, pipe, Subject } from 'rxjs';
 import { debounceTime} from 'rxjs/operators';
 
 import { Producto } from '../modelos/producto.model';
@@ -11,6 +11,7 @@ import { Producto } from '../modelos/producto.model';
 export class ProductoService implements OnInit {
   productos: Producto[] = [
     {
+      idProducto:"1",
       desProducto: 'Arroz',
       stockUmc: 10,
       stockUmv: 1,
@@ -18,6 +19,7 @@ export class ProductoService implements OnInit {
       costoProd: 1200,
     },
     {
+      idProducto:"2",
       desProducto: 'Leche',
       stockUmc: 10,
       stockUmv: 1,
@@ -25,6 +27,7 @@ export class ProductoService implements OnInit {
       costoProd: 3400,
     },
     {
+      idProducto:"3",
       desProducto: 'Aceite',
       stockUmc: 10,
       stockUmv: 1,
@@ -32,6 +35,7 @@ export class ProductoService implements OnInit {
       costoProd: 8900,
     },
     {
+      idProducto:"4",
       desProducto: 'Panela',
       stockUmc: 10,
       stockUmv: 1,
@@ -41,7 +45,8 @@ export class ProductoService implements OnInit {
   ];
   productos$ = of(this.productos);
   producto$ = new Observable<Producto[]>();
-  alerta = new BehaviorSubject<string>("");
+
+  alerta = new Subject();
   alertaObs$ = this.alerta.asObservable()
   //eventProducto = new EventEmitter<Producto[]>()
   //TODO
@@ -56,8 +61,8 @@ export class ProductoService implements OnInit {
   }
   ngOnInit(): void {}
 
-  obtenerNotificacion(message:string){
-    this.alerta.next(message);
+  obtenerNotificacion(message: string, time: number = 1000){
+    this.alerta.next({message ,time});
     return this.alertaObs$
   }
   guardarProducto(producto: Producto) {
@@ -73,7 +78,7 @@ export class ProductoService implements OnInit {
     );
     return this.producto$;
   }
-  notificarAlerta(message:string){
-
+  obtenerUltimoRegistro(){
+    return this.producto$.pipe(map((producto:Producto[])=>{return producto.length}))
   }
 }

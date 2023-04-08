@@ -13,53 +13,52 @@ export class ListarProductoComponent implements OnInit {
   buscador: string;
   //@ViewChild('no_match') no_match:Element
   productos: Producto[] = [];
-  message: boolean = false;
-  alert: string = '';
+  divMessage: boolean = false;
+  alerta: string = '';
 
   constructor(
     private productoService: ProductoService,
-    private fMessages: FlashMessagesService
+    //private fMessages: FlashMessagesService
   ) {}
 
   ngOnInit(): void {
     this.productos = this.productoService.productos;
   }
   buscarProducto() {
-    // alert(this.no_match.innerHTML.length)
     let productoE: Producto[] = [];
-
-    //let cont:number= 0;
-    // this.productos = this.productoService.productos
     this.productoService
       .buscarProducto()
       .subscribe((productoEncontrado: Producto[]) =>
         productoEncontrado.map((pr: Producto) => {
           if (
-            pr.desProducto?.toUpperCase().search(this.buscador.toUpperCase()) !=
-            -1
+            pr.desProducto?.toUpperCase().search(this.buscador.toUpperCase()) != -1
           ) {
-            // this.message= false
             productoE.push(pr);
           }
         })
       );
     console.log(productoE);
     this.productos = productoE; //The matches are assgined to the array of object this.productos
+    //if there´s not matches....
     if (productoE.length === 0) {
-      this.message = true;
+      this.divMessage = true;
       this.productoService
-        .obtenerNotificacion(`El producto ${this.buscador} no esta en lista`)
+        .obtenerNotificacion(`El producto ${this.buscador} no esta en lista`,2000)
         .subscribe((res: any) => {
-          this.alert = res;
+          this.alerta = res.message;
           setTimeout(() => {
-            this.message = false;
-          }, 2000);
+            this.divMessage = false;
+          }, res.time);
         });
 
       // this.fMessages.show(`No existen concidencias de <i>${this.buscador}</i>`,{
       //   cssClass:'alert-warning',timeout:1000
       // })
     }
-    //console.log(this.cont)
+   
+  }
+  eliminarProducto(producto:string){
+      alert(producto)
   }
 }
+
