@@ -3,11 +3,20 @@
     <div class="row">
       <form class="form-group">
         <div class="col-md-4 d-flex search" >
-          <input
+         <!--  <input
             type="text"
             [(ngModel)]="buscador"
             name="buscador"
             (ngModelChange)="buscarProducto()"
+            id="buscador"
+            class="form-control"
+            placeholder="Buscar producto"
+          /> -->
+          <input
+            type="text"
+            ngModel
+            name="buscador"
+            (ngModelChange)="buscarProducto($event)"
             id="buscador"
             class="form-control"
             placeholder="Buscar producto"
@@ -27,6 +36,7 @@
     </div>
   </div>
 </header>
+<section>
 <div class="container">
   <div class="row">
     <div class="col-md-9 mt-2 mx-auto">
@@ -47,8 +57,11 @@
             <td>{{ producto?.costoProd | currency : "MNX" : "$" : "1.1-2" }}</td>
             <td>
               <a
-                    routerLink="/clientes/editar/{{ producto.idProducto }}"
-                    class="btn btn-secondary"
+                  class="btn btn-primary btn-block"
+                  data-bs-toggle="modal"
+                  data-bs-target="#agregarClienteModal"
+                  
+                  class="btn btn-secondary"
                   >
                     <i class="fas fa-angle-double-right"></i>Editar
                   </a>
@@ -62,3 +75,36 @@
     </div>
   </div>
 </div>
+</section>
+<div class="modal fade" id="agregarClienteModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">Agregar Producto</h5>
+        <button class="close" data-bs-dismiss="modal" #botonCerrar>
+          <span>&times;</span>
+        </button>
+      </div>
+      <form action="">
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10 mx-auto ">
+                <div class="form-group">
+                  <label for="nombreProd">Nombre Producto: </label>
+                  <input type="text" name="nombreProd" class="form-control" >
+                </div>
+                <div class="form-group">
+                  <label for="costoProd">Costo: </label>
+                  <input type="text" name="costoProd" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </form>
+    </div>
+  </div>
+</div>      

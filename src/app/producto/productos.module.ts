@@ -1,22 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PedidosRoutingModule } from './pedidos-routing.module';
+import { ProductosRoutingModule } from './productos-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'flash-messages-angular';
 import {HttpClientModule} from '@angular/common/http'
+import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 
 
 
 @NgModule({
   declarations: [
+    CrearProductoComponent
   ],
   imports: [
     CommonModule,
-    PedidosRoutingModule,
+    ProductosRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlashMessagesModule.forRoot()//If this module is not imported the component is blocked
+    //FlashMessagesModule.forRoot()//If this module is not imported the component is blocked
     ]
 })
-export class PedidosModule { }
+export class ProductosModule { }

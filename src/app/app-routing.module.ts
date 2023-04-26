@@ -16,6 +16,11 @@ const routes: Routes = [
     loadChildren:()=>import('./pedidos/pedidos.module').then(m=>m.PedidosModule)
   },
   {
+     path:'producto',
+     loadChildren:()=>import('./producto/productos.module').then(p=>p.ProductosModule)
+  },
+  {
+
     path:'error-404',component:Error404Component
   },
   {path:'**',redirectTo:'error-404'}

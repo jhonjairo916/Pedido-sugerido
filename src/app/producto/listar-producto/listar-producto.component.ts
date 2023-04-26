@@ -10,7 +10,7 @@ import { ProductoService } from 'src/app/services/producto.service';
   styleUrls: ['./listar-producto.component.css'],
 })
 export class ListarProductoComponent implements OnInit {
-  buscador: string;
+ // buscador: string;
   //@ViewChild('no_match') no_match:Element
   productos: Producto[] = [];
   divMessage: boolean = false;
@@ -24,14 +24,14 @@ export class ListarProductoComponent implements OnInit {
   ngOnInit(): void {
     this.productos = this.productoService.productos;
   }
-  buscarProducto() {
+  buscarProducto(event:string) {
     let productoE: Producto[] = [];
     this.productoService
       .buscarProducto()
       .subscribe((productoEncontrado: Producto[]) =>
         productoEncontrado.map((pr: Producto) => {
           if (
-            pr.desProducto?.toUpperCase().search(this.buscador.toUpperCase()) != -1
+            pr.desProducto?.toUpperCase().search(event.toUpperCase()) != -1
           ) {
             productoE.push(pr);
           }
@@ -43,7 +43,7 @@ export class ListarProductoComponent implements OnInit {
     if (productoE.length === 0) {
       this.divMessage = true;
       this.productoService
-        .obtenerNotificacion(`El producto ${this.buscador} no esta en lista`,2000)
+        .obtenerNotificacion(`El producto ${event} no esta en lista`,2000)
         .subscribe((res: any) => {
           this.alerta = res.message;
           setTimeout(() => {

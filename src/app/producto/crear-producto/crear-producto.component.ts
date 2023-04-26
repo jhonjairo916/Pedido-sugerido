@@ -41,13 +41,22 @@ export class CrearProductoComponent implements OnInit {
     //TODO: Find the mayor number in idProducto in order to assign a new id to the producto to save
     if(form.valid){
       this.producto.idProducto = (this.productoLength + 1).toString()
-      this.productoService.guardarProducto(this.producto);
-      Swal.fire(
-        `Registration of ${this.producto.desProducto} recorded succesfully`,
-        'Vover a cargar el listado?',
-        'success'
-      )
-      this.router.navigate(['pedido/listar_producto'])
+      Swal.fire({
+        title: 'Do you want to save the product?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Save',
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          this.productoService.guardarProducto(this.producto);
+          this.router.navigate(['pedido/listar_producto'])
+          Swal.fire(`Product ${this.producto.desProducto} recorded succesfully`, '', 'success')
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+        }
+      })
  
     }
      /* if(!form.valid){
@@ -56,6 +65,5 @@ export class CrearProductoComponent implements OnInit {
       })
     } */
   }
-//edit  with angular and mysql? 
-  
+    
 }
