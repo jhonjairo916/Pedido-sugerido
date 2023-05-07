@@ -19,8 +19,8 @@ import { FlashMessagesModule } from 'flash-messages-angular';
     BodyComponent,
     FooterComponent,
     LoginComponent,
-    Error404Component,
-    ListarProductoComponent
+    Error404Component
+    
   ],
   imports: [
     BrowserModule,

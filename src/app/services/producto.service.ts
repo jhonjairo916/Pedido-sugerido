@@ -9,6 +9,7 @@ import { Producto } from '../modelos/producto.model';
   providedIn: 'root',
 })
 export class ProductoService implements OnInit {
+  producto:Producto;
   productos: Producto[] = [
     {
       idProducto:"1",
@@ -68,7 +69,7 @@ export class ProductoService implements OnInit {
   guardarProducto(producto: Producto) {
     this.productos.push(producto);
   }
-  buscarProducto() {
+  buscarProductos() {
     //let productoE: Producto[] = [];
      this.producto$ = this.productos$.pipe(
       debounceTime(1000),
@@ -81,4 +82,9 @@ export class ProductoService implements OnInit {
   obtenerUltimoRegistro(){
     return this.producto$.pipe(map((producto:Producto[])=>{return producto.length}))
   }
+  buscarProducto(id:Producto){
+    let pr = this.productos.indexOf(id)
+   return this.productos[pr];
+  }
+
 }

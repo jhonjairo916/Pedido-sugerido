@@ -5,12 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'flash-messages-angular';
 import {HttpClientModule} from '@angular/common/http'
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { ListarProductoComponent } from './listar-producto/listar-producto.component';
 
 
 
 @NgModule({
   declarations: [
-    CrearProductoComponent
+    CrearProductoComponent,
+    EditarProductoComponent,
+    ListarProductoComponent
   ],
   imports: [
     CommonModule,

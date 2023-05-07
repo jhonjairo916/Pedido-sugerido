@@ -33,7 +33,7 @@ export class CrearProductoComponent implements OnInit {
   guardarProducto(form:NgForm){
     this.producto.desProducto= form.value.desProducto;
     this.producto.costoProd= form.value.costoProd;
-    this.productoService.buscarProducto().subscribe(
+    this.productoService.buscarProductos().subscribe(
       (produc)=>
       {
        this.productoLength =  produc.length
@@ -51,7 +51,7 @@ export class CrearProductoComponent implements OnInit {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           this.productoService.guardarProducto(this.producto);
-          this.router.navigate(['pedido/listar_producto'])
+          this.router.navigate(['producto/listar_producto'])
           Swal.fire(`Product ${this.producto.desProducto} recorded succesfully`, '', 'success')
         } else if (result.isDenied) {
           Swal.fire('Changes are not saved', '', 'info')

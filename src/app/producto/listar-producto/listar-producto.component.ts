@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { debounceTime } from 'rxjs/operators';
 import { Producto } from 'src/app/modelos/producto.model';
@@ -12,9 +12,13 @@ import { ProductoService } from 'src/app/services/producto.service';
 export class ListarProductoComponent implements OnInit {
  // buscador: string;
   //@ViewChild('no_match') no_match:Element
+  /* nombreProd:string|undefined;
+  costoProd:number|undefined=0; */
+  //@ViewChild('costoProd') costoProd:ElementRef
   productos: Producto[] = [];
   divMessage: boolean = false;
   alerta: string = '';
+  pr:Producto;
 
   constructor(
     private productoService: ProductoService,
@@ -27,7 +31,7 @@ export class ListarProductoComponent implements OnInit {
   buscarProducto(event:string) {
     let productoE: Producto[] = [];
     this.productoService
-      .buscarProducto()
+      .buscarProductos()
       .subscribe((productoEncontrado: Producto[]) =>
         productoEncontrado.map((pr: Producto) => {
           if (
@@ -59,6 +63,17 @@ export class ListarProductoComponent implements OnInit {
   }
   eliminarProducto(producto:string){
       alert(producto)
+  }
+  editarProducto(pro:Producto){
+    //this.pr = "hola";
+    this.pr = this.productoService.buscarProducto(pro);
+    //console.log(this.productos[pr])
+   /*  this.costoProd = this.pr.costoProd
+    this.nombreProd = this.pr.desProducto */ 
+    //console.log(this.nombreProd)
+   // return this.pr
+
+
   }
 }
 
