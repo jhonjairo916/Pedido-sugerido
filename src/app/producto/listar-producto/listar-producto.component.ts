@@ -65,14 +65,7 @@ export class ListarProductoComponent implements OnInit {
       alert(producto)
   }
   editarProducto(pro:Producto){
-    //this.pr = "hola";
     this.pr = this.productoService.buscarProducto(pro);
-    //console.log(this.productos[pr])
-   /*  this.costoProd = this.pr.costoProd
-    this.nombreProd = this.pr.desProducto */ 
-    //console.log(this.nombreProd)
-   // return this.pr
-
 
   }
 }
