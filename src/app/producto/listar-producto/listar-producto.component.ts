@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { FlashMessagesService } from 'flash-messages-angular';
 import { debounceTime } from 'rxjs/operators';
 import { Producto } from 'src/app/modelos/producto.model';
@@ -18,24 +19,29 @@ export class ListarProductoComponent implements OnInit {
   productos: Producto[] = [];
   divMessage: boolean = false;
   alerta: string = '';
+  //edit:boolean=false;
   pr:Producto;
 
   constructor(
     private productoService: ProductoService,
+    private route: Router
     //private fMessages: FlashMessagesService
   ) {}
 
   ngOnInit(): void {
     this.productos = this.productoService.productos;
+    
+    //console.log("Listado de productos",this.productos);
   }
-  buscarProducto(event:string) {
+  //The matches of producto are filtered
+  buscarProducto(eventBuscador:string) {
     let productoE: Producto[] = [];
     this.productoService
       .buscarProductos()
       .subscribe((productoEncontrado: Producto[]) =>
         productoEncontrado.map((pr: Producto) => {
           if (
-            pr.desProducto?.toUpperCase().search(event.toUpperCase()) != -1
+            pr.desProducto?.toUpperCase().search(eventBuscador.toUpperCase()) != -1
           ) {
             productoE.push(pr);
           }
@@ -47,7 +53,7 @@ export class ListarProductoComponent implements OnInit {
     if (productoE.length === 0) {
       this.divMessage = true;
       this.productoService
-        .obtenerNotificacion(`El producto ${event} no esta en lista`,2000)
+        .obtenerNotificacion(`El producto ${eventBuscador} no esta en lista`,2000)
         .subscribe((res: any) => {
           this.alerta = res.message;
           setTimeout(() => {
@@ -64,8 +70,21 @@ export class ListarProductoComponent implements OnInit {
   eliminarProducto(producto:string){
       alert(producto)
   }
-  editarProducto(pro:Producto){
-    this.pr = this.productoService.buscarProducto(pro);
+  //Este producto aparecera en el modal para luego actualizar
+   editarProducto(pro:Producto){
+   // this.edit = true;
+    let prod!:Producto
+    //this.productoService.buscarProducto(pro).then(res=>{this.pr=res});
+     prod = this.productoService.buscarProducto(pro)
+     this.pr= prod
+    //console.log(prod,'kkkkkk')
+    /* let extrasNavigation: NavigationExtras={
+      queryParams:{
+        pr:prod
+      }
+    }
+    this.route.navigate([`producto/editar_producto`],extrasNavigation) */
+    
 
   }
 }

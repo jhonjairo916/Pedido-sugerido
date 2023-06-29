@@ -52,7 +52,7 @@
         <tbody class="table-group-divider">
           <tr *ngFor="let producto of productos; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ producto.idProducto}}</td>
+            <td>{{ producto?.idProducto}}</td>
             <td>{{ producto?.desProducto }}</td>
             <td>{{ producto?.costoProd | currency : "MNX" : "$" : "1.1-2" }}</td>
             <td>
@@ -76,4 +76,8 @@
   </div>
 </div>
 </section>
-<app-editar-producto [pr]="pr"></app-editar-producto>    
+<!--Se envia el dato selecionado al modal que esta app-editar-producto-->
+<!--Si se da click en el boton de editar-->  
+<ng-container *ngIf="pr">
+  <app-editar-producto [pr]="pr"> </app-editar-producto>
+</ng-container> 

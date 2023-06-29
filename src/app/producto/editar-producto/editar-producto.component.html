@@ -12,15 +12,20 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-10 mx-auto ">
+                 <!--  <input type="hidden" name="idProducto" [(ngModel)]="producto.idProducto"> -->
                   <div class="form-group">
                     <label for="nombreProd">Nombre Producto: </label>
-                    <input type="text" [(ngModel)]="nombreProd" name="nombreProd" class="form-control" >
+                    <input type="text"  [(ngModel)]="producto.desProducto" name="desProducto" class="form-control" >
                   </div>
                   <div class="form-group">
                     <label for="costoProd">Costo: </label>
-                    <input type="text" [(ngModel)]="costoProd"  name="costoProd" class="form-control">
+                    <input type="text"  [(ngModel)]="producto.costoProd"  name="costoProd" class="form-control">
                   </div>
-                  <button  class="btn btn-primary mt-2"><i class="fas fa-angle-double-right">Actualizar</i></button>
+                  <div class="form-group">
+                    <label for="costoProd">Num caras Pro: </label>
+                    <input type="text"  [(ngModel)]="producto.numCarasProd"  name="numCarasProd" class="form-control">
+                  </div>
+                  <button  (click)="actualizarProducto(producto.idProducto)" class="btn btn-primary mt-2"><i class="fas fa-angle-double-right">Actualizar</i></button>
                 </div>
               </div>
             </div>

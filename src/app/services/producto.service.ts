@@ -4,48 +4,16 @@ import { BehaviorSubject, map, Observable, of, pipe, Subject } from 'rxjs';
 import { debounceTime} from 'rxjs/operators';
 
 import { Producto } from '../modelos/producto.model';
+import { productoMock } from '../mocks/mocks.producto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductoService implements OnInit {
   producto:Producto;
-  productos: Producto[] = [
-    {
-      idProducto:"1",
-      desProducto: 'Arroz',
-      stockUmc: 10,
-      stockUmv: 1,
-      numCarasProd: 2,
-      costoProd: 1200,
-    },
-    {
-      idProducto:"2",
-      desProducto: 'Leche',
-      stockUmc: 10,
-      stockUmv: 1,
-      numCarasProd: 2,
-      costoProd: 3400,
-    },
-    {
-      idProducto:"3",
-      desProducto: 'Aceite',
-      stockUmc: 10,
-      stockUmv: 1,
-      numCarasProd: 2,
-      costoProd: 8900,
-    },
-    {
-      idProducto:"4",
-      desProducto: 'Panela',
-      stockUmc: 10,
-      stockUmv: 1,
-      numCarasProd: 2,
-      costoProd: 2400,
-    },
-  ];
+  productos = productoMock //Arreglo para simular productos
   productos$ = of(this.productos);
-  producto$ = new Observable<Producto[]>();
+  //producto$ = new Observable<Producto[]>();
 
   alerta = new Subject();
   alertaObs$ = this.alerta.asObservable()
@@ -69,22 +37,46 @@ export class ProductoService implements OnInit {
   guardarProducto(producto: Producto) {
     this.productos.push(producto);
   }
+  actualizarProducto(id:string| undefined, producto:Producto){
+      //console.log(id,'-'+ producto)
+
+      const index = this.productos.findIndex(prod => prod.idProducto === id);
+      //console.log(index,'---'+ id)
+      
+      this.productos[index] = producto;
+      //console.log(this.productos[index],'---'+producto.desProducto)
+  }
   buscarProductos() {
     //let productoE: Producto[] = [];
-     this.producto$ = this.productos$.pipe(
+     return this.productos$.pipe(
       debounceTime(1000),
       map((productos: Producto[]) => {
         return productos;
       })
     );
-    return this.producto$;
+    //return this.producto$;
   }
-  obtenerUltimoRegistro(){
+ /*  obtenerUltimoRegistro(){
     return this.producto$.pipe(map((producto:Producto[])=>{return producto.length}))
-  }
-  buscarProducto(id:Producto){
+  } */
+ /*  obtenerUltimoRegistro():Promise<number>{
+    return Promise.resolve(this.productos.length)
+  } */
+ /*  buscarProducto(id:Producto):Promise<Producto>{
+    let prod:Producto
     let pr = this.productos.indexOf(id)
-   return this.productos[pr];
+
+    prod=this.productos[pr]
+    //console.log(pr,'-----')
+   return Promise.resolve(prod);
+  } */
+  buscarProducto(id:Producto){
+    let prod:Producto
+    let pr = this.productos.indexOf(id)
+
+    prod=this.productos[pr]
+    //console.log(pr,'-----')
+   return prod
   }
 
 }

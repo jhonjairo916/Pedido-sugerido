@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListarProductoComponent } from './listar-producto/listar-producto.component';
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 
 const routes: Routes =[
     {
@@ -10,6 +11,12 @@ const routes: Routes =[
     },
     {
         path:'listar_producto',component:ListarProductoComponent
+    },
+    {
+        path:'editar_producto',component:EditarProductoComponent
+    },
+    {
+        path:'**',redirectTo:"/404"
     }
 ];
 
