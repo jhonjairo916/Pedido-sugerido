@@ -5,6 +5,10 @@ import { debounceTime} from 'rxjs/operators';
 
 import { Producto } from '../modelos/producto.model';
 import { productoMock } from '../mocks/mocks.producto';
+import Swal from 'sweetalert2';
+import {  Router } from '@angular/router';
+import { error } from 'console';
+
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +28,7 @@ export class ProductoService implements OnInit {
   /* produc = new BehaviorSubject<Producto[]>(this.productos);
   produc$ = this.produc.asObservable();  
  */
-  constructor() {
+  constructor(private router:Router) {
     //this.eventProducto.emit(this.productos);
     //this.productos$=of(this.productos)
   }
@@ -38,13 +42,8 @@ export class ProductoService implements OnInit {
     this.productos.push(producto);
   }
   actualizarProducto(id:string| undefined, producto:Producto){
-      //console.log(id,'-'+ producto)
-
       const index = this.productos.findIndex(prod => prod.idProducto === id);
-      //console.log(index,'---'+ id)
-      
       this.productos[index] = producto;
-      //console.log(this.productos[index],'---'+producto.desProducto)
   }
   buscarProductos() {
     //let productoE: Producto[] = [];
@@ -62,21 +61,23 @@ export class ProductoService implements OnInit {
  /*  obtenerUltimoRegistro():Promise<number>{
     return Promise.resolve(this.productos.length)
   } */
- /*  buscarProducto(id:Producto):Promise<Producto>{
+  buscarProducto(id:Producto):Promise<Producto>{
     let prod:Producto
     let pr = this.productos.indexOf(id)
 
     prod=this.productos[pr]
     //console.log(pr,'-----')
    return Promise.resolve(prod);
-  } */
-  buscarProducto(id:Producto){
+  }
+ /*  buscarProducto(id:Producto){
     let prod:Producto
     let pr = this.productos.indexOf(id)
 
     prod=this.productos[pr]
     //console.log(pr,'-----')
    return prod
-  }
-
+  } */
+  eliminarProducto(index: number ) {
+   return this.productos.splice(index,1);
+}
 }

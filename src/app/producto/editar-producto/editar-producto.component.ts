@@ -8,6 +8,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Producto } from 'src/app/modelos/producto.model';
 import { ProductoService } from 'src/app/services/producto.service';
 
@@ -18,22 +19,24 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class EditarProductoComponent implements OnInit, OnChanges {
   @ViewChild('botonCerrar') botonModal: ElementRef;
-  producto: Producto = {
-    idProducto: '',
-    desProducto: '',
-    costoProd: 0,
-  };
+  producto: Producto = {};
+
+  miFormulario: FormGroup = new FormGroup({});
   /* id: string | undefined;
   nombreProd:string | undefined ;
   costoProd:number | undefined; */
   @Input() pr: Producto;
-  @Input() pr2:string
   //index?:number;
-  constructor(private productoService: ProductoService) {}
+  constructor(
+    private productoService: ProductoService,
+    private formBuilder: FormBuilder
+    ) {}
 
   ngOnInit(): void {
-    //console.log('ngOnInit.....');
 
+    this.miFormulario?.valueChanges.subscribe((changes)=>{
+
+    })
     /* console.log(history.state.pr, 'Este el el State');
     if (history.state.pr) {
       this.producto.idProducto = history.state.pr.idProducto;
@@ -47,12 +50,10 @@ export class EditarProductoComponent implements OnInit, OnChanges {
     if(changes)
     {
       let key=Object.keys(changes)[0];
-      console.log("kkkk",key)
-      //Its verified the data that arrives by input is obtained it´s currentValue and added to this.producto array
+      //Its verified the data that arrives by input, is obtained it´s currentValue and added to this.producto array
       switch(key){
         case "pr":
           this.producto= changes[key].currentValue
-          console.log("cambios",changes[key].currentValue)
           break;
         }
     }

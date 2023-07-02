@@ -8,11 +8,12 @@
           </button>
         </div>
         <form action=""  #productoForm="ngForm">
+          <!-- <form action="" [formGroup]="miFormulario"> -->
           <div class="modal-body">
             <div class="container">
               <div class="row">
                 <div class="col-md-10 mx-auto ">
-                 <!--  <input type="hidden" name="idProducto" [(ngModel)]="producto.idProducto"> -->
+                  <input type="hidden" name="idProducto" [(ngModel)]="producto.idProducto">
                   <div class="form-group">
                     <label for="nombreProd">Nombre Producto: </label>
                     <input type="text"  [(ngModel)]="producto.desProducto" name="desProducto" class="form-control" >
