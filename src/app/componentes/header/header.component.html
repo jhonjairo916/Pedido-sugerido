@@ -5,20 +5,24 @@
     <button
       class="navbar-toggler"
       type="button"
-      data-bs-toggler="collapse"
+      data-bs-toggle="collapse"
       data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown"
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
     <span class="navbar-toggler-icon"></span>
+    
     </button>
     <div id="navbarNavDropdown" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a routerLink="producto/listar_producto" class="nav-link"><i class="fas fa-list"></i>Listar productos</a></li>
             <li class="nav-item"><a routerLink="producto/crear_producto" class="nav-link"><i class="fas fa-list"></i>Crear Productos</a></li>
-            <li class="nav-item"><a routerLink="registro" class="nav-link"><i class="fas fa-id-card"></i> Registro</a></li>
-            <li class="nav-item"><a routerLink="login" class="nav-link"><i class="fas fa-solid fa-user"></i> Login</a></li>
+            <li *ngIf="sessionActiva" class="nav-item"><a routerLink="registro" class="nav-link"><i class="fas fa-id-card"></i> Registro</a></li>
+            <li *ngIf="sessionActiva" (click)="cerrarSession()" style="cursor:pointer" class="nav-item"><a  class="nav-link"><i class="fa fa-sign-out"></i> Log Out</a></li>
+            <li *ngIf="!sessionActiva" class="nav-item"><a routerLink="login" class="nav-link"><i class="fa fa-sign-in"></i> Login</a></li>
+            <li *ngIf="nombreUsuario" style="cursor:pointer;" class="nav-item"><a class="nav-link"><i class="fas fa-user"></i> {{ nombreUsuario +' '+ apellidoUsuario}}</a>
+
         </ul>
     
     </div>

@@ -9,7 +9,6 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { Error404Component } from './componentes/error404/error404.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { ListarProductoComponent } from './producto/listar-producto/listar-producto.component';
 import { FlashMessagesModule } from 'flash-messages-angular';
 
 @NgModule({

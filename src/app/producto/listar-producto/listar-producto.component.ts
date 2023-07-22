@@ -31,9 +31,6 @@ export class ListarProductoComponent implements OnInit {
   ngOnInit(): void {
     this.productos = this.productoService.productos;
     this.buscador=""
-
-    
-    //console.log("Listado de productos",this.productos);
   }
   //The matches of producto are filtered
   buscarProducto(eventBuscador:string) {

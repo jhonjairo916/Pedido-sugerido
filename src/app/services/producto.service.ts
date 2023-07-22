@@ -5,9 +5,7 @@ import { debounceTime} from 'rxjs/operators';
 
 import { Producto } from '../modelos/producto.model';
 import { productoMock } from '../mocks/mocks.producto';
-import Swal from 'sweetalert2';
 import {  Router } from '@angular/router';
-import { error } from 'console';
 
 
 @Injectable({

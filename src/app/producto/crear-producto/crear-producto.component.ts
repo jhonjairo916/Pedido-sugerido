@@ -15,11 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class CrearProductoComponent implements OnInit {
   productos: Producto[]=[]
-  producto: Producto={
-    idProducto:'',
-    desProducto:'',
-    costoProd:0
-  }
+  producto: Producto={ }
   productoLength:number=0
   constructor(
     //private flashMessages: FlashMessagesService
