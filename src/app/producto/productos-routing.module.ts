@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListarProductoComponent } from './listar-producto/listar-producto.component';
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { VerificarSessionGuard } from '../guards/login/verificar-session.guard'; 
+
 
 const routes: Routes =[
     {

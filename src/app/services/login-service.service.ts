@@ -81,8 +81,8 @@ export class LoginServiceService {
     return claveEncrip
   }
   cerrarSession(){
-    sessionStorage.removeItem("session");
-    this.refrescarDatosSession({})
+    localStorage.removeItem("session_usuario");
+    this.refrescarDatosSession({sesionActiva:false})
     this.router.navigate(['login']);
     console.log('cerrando session',this.usuario)
   }

@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http'
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 import { ListarProductoComponent } from './listar-producto/listar-producto.component';
+import { VerificarSessionGuard } from '../guards/login/verificar-session.guard';
 
 
 

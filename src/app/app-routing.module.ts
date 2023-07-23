@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BodyComponent } from './componentes/body/body.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { Error404Component } from './componentes/error404/error404.component';
+import { VerificarSessionGuard } from './guards/login/verificar-session.guard';
 
 const routes: Routes = [
   {path:'',component:BodyComponent},
@@ -16,7 +17,7 @@ const routes: Routes = [
     loadChildren:()=>import('./pedidos/pedidos.module').then(m=>m.PedidosModule)
   },
   {
-     path:'producto',
+     path:'producto',canActivate:[VerificarSessionGuard],
      loadChildren:()=>import('./producto/productos.module').then(p=>p.ProductosModule)
   },
   {

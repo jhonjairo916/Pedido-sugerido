@@ -16,7 +16,8 @@ export class VerificarSessionGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       let sessionActiva = this.loginService.obtenerDatosSession()
-      if(sessionActiva.sesionActiva)
+      console.log('kkkkkk'+sessionActiva.sesionActiva)
+      if(sessionActiva?.sesionActiva)
       {
         return true
       }else{

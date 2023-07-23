@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
       this.sessionActiva= datos.sesionActiva; 
       this.nombreUsuario = datos.nombre 
       this.apellidoUsuario = datos.apellido 
+      console.log('Header sesion activa'+this.sessionActiva)
   })
     
   }

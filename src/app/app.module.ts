@@ -10,6 +10,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { Error404Component } from './componentes/error404/error404.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesModule } from 'flash-messages-angular';
+import { VerificarSessionGuard } from './guards/login/verificar-session.guard';
 
 @NgModule({
   declarations: [
